@@ -1,0 +1,28 @@
+{
+  "name": "wts",
+  "version": "1.0.0",
+  "description": "",
+  "private": true,
+  "main": "index.js",
+  "scripts": {},
+  "author": "wts",
+  "license": "ISC",
+  "dependencies": {
+    "webpack": "^1.13.1"
+  },
+  "devDependencies": {
+    "webpack-dev-server": "^1.14.1"
+  },
+  "babel": {
+    "presets": [
+      "es2015",
+      "react"
+    ],
+    "plugins": [
+      "babel-plugin-antd"
+    ]
+  },
+  "pre-commit": [
+    "lint"
+  ]
+}
