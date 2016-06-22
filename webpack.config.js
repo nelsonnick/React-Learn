@@ -1,62 +1,34 @@
-var CopyWebpackPlugin = require('copy-webpack-plugin');
-var webpack = require('webpack');
-
 var path = require('path');
-//var HtmlwebpackPlugin = require('html-webpack-plugin');
-//定义了一些文件夹的路径
-var ROOT_PATH = path.resolve(__dirname);
-var APP_PATH = path.resolve(ROOT_PATH, 'app');
-var BUILD_PATH = path.resolve(ROOT_PATH, 'build');
-
-
-
-var plugins = [
-    new CopyWebpackPlugin([
-        {from: './index.html', to: './index.html'},
-        {from: './home.html', to: './home.html'}
-    ]),
-    //第三方库自动注入
-    new  webpack.ProvidePlugin({
-        '_':'lodash',
-        '$':'jquery',
-        'React':'react',
-        'ReactDOM':'react-dom'
-    })
-    // new HtmlwebpackPlugin({
-    //     title: 'Hello World app'
-    // })
-];
-
+var webpack = require('webpack');
+var ExtractTextPlugin = require("extract-text-webpack-plugin");
+var HtmlWebpackPlugin = require('html-webpack-plugin');
 module.exports = {
-    entry: 
-{
-        mainPage: './mainPage.js',
-       
+    entry: {
+        index: "./src/js/page/index.js",
     },
     output: {
-        path: BUILD_PATH,
-        filename: '[name].js'
+        path: path.join(__dirname, 'dist'),
+        publicPath: "/React-Learn/dist/",
+        filename: "js/[name].js",
+        chunkFilename: "js/[id].chunk.js"
     },
-    devServer: {
-        historyApiFallback: true,
-        hot: true,
-        inline: true,
-        progress: true,
-    },
-    plugins: plugins,
-
     module: {
-        loaders: [
-
-            {test: /(\.js$|\.jsx$)/,
-                exclude: /node_modules/,
-                loader: 'babel',
-                query: {
-                    presets: ['react', 'es2015']
-                }
-            },
-            { test: /\.css$/, loader: "style!css" },
-            {test: /\.less/,loader: 'style-loader!css-loader!less-loader'}
+        loaders: [    //加载器
+            {test: /\.css$/, loader: ExtractTextPlugin.extract("style", "css")}
         ]
-    }
+    },
+    plugins: [
+        new ExtractTextPlugin("css/[name].css"),    //单独使用style标签加载css并设置其路径
+        new HtmlWebpackPlugin({                        //根据模板插入css/js等生成最终HTML
+            favicon: './src/img/favicon.ico', //favicon路径
+            filename: '/view/index.html',    //生成的html存放路径，相对于 path
+            template: './src/view/index.html',    //html模板路径
+            inject: true,    //允许插件修改哪些内容，包括head与body
+            hash: true,    //为静态资源生成hash值
+            minify: {    //压缩HTML文件
+                removeComments: true,    //移除HTML中的注释
+                collapseWhitespace: false    //删除空白符与换行符
+            }
+        })
+    ]
 };

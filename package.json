@@ -11,18 +11,10 @@
     "webpack": "^1.13.1"
   },
   "devDependencies": {
+    "css-loader": "^0.23.1",
+    "html-webpack-plugin": "^2.21.0",
+    "jquery": "^1.12.4",
+    "style-loader": "^0.13.1",
     "webpack-dev-server": "^1.14.1"
-  },
-  "babel": {
-    "presets": [
-      "es2015",
-      "react"
-    ],
-    "plugins": [
-      "babel-plugin-antd"
-    ]
-  },
-  "pre-commit": [
-    "lint"
-  ]
+  }
 }
