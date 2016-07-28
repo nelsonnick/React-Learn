@@ -27,7 +27,7 @@ module.exports = {
         new OpenBrowserPlugin({
             url:'http://localhost:9000'
         }),
-        //压缩打包的文件
+        //压缩打包的文件、代码混淆
         new webpack.optimize.UglifyJsPlugin({
             compress: {
                 warnings: false
@@ -38,7 +38,26 @@ module.exports = {
             'React':'react',
             'ReactDOM':'react-dom',
             '$':'jquery'
+        }),
+        //一个运行时的报错，详见https://github.com/facebook/react/issues/6479
+        new webpack.DefinePlugin({
+            "process.env": {
+                NODE_ENV: JSON.stringify("production")
+            }
         })
+        // 分离css
+        //new ExtractTextPlugin('[name].bundle.css', {
+          //  allChunks: true
+        //}),
+        // 抽取公共资源
+        // new webpack.optimize.CommonsChunkPlugin({
+        //     // 与 entry 中的 jquery 对应
+        //     name: 'jquery',
+        //     // 输出的公共资源名称
+        //     filename: 'common.bundle.js',
+        //     // 对所有entry实行这个规则
+        //     minChunks: Infinity
+        // }),
     ],
     //处理的代码类型
     resolve: {
@@ -66,7 +85,8 @@ module.exports = {
                 exclude:/node_modules/,
                 loader:'babel',
                 query:{
-                    presets:['react','es2015']// es2015 处理 ES6 语法，react 处理 jsx 语法
+                    presets:['react','es2015'],// es2015 处理 ES6 语法，react 处理 jsx 语法
+                    plugins: [["antd",{ "style": "css" }]]
                 }
             }
         ]
