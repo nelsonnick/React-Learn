@@ -11,7 +11,7 @@ export default class SystemMenu extends React.Component {
     };
 
     handleClick(e) {
-        console.log('click ', e);
+        //console.log('click ', e);
         this.setState({
             current: e.key,
             openKeys: e.keyPath.slice(1),
@@ -24,33 +24,25 @@ export default class SystemMenu extends React.Component {
     };
     render() {
         return (
-            <Menu onClick={this.handleClick}
+            <Menu onClick={this.handleClick.bind(this)}
                   style={{ width: 240 }}
                   openKeys={this.state.openKeys}
-                  onOpen={this.onToggle}
-                  onClose={this.onToggle}
+                  onOpen={this.onToggle.bind(this)}
+                  onClose={this.onToggle.bind(this)}
                   selectedKeys={[this.state.current]}
                   mode="inline"
             >
                 <SubMenu key="sub1" title={<span><Icon type="mail" /><span>导航一</span></span>}>
-                    <Menu.Item key="1">选项1</Menu.Item>
-                    <Menu.Item key="2">选项2</Menu.Item>
-                    <Menu.Item key="3">选项3</Menu.Item>
-                    <Menu.Item key="4">选项4</Menu.Item>
+                    <Menu.Item key="1"><a onClick={this.props.menuFunctionLeft.bind(this, 'teacher')}>教师管理</a></Menu.Item>
+                    <Menu.Item key="2"><a onClick={this.props.menuFunctionLeft.bind(this, 'student')}>学生管理</a></Menu.Item>
+                    <Menu.Item key="3"><a onClick={this.props.menuFunctionLeft.bind(this, 'parent')}>家长管理</a></Menu.Item>
+                    <Menu.Item key="4"><a onClick={this.props.menuFunctionLeft.bind(this, 'classroom')}>班级管理</a></Menu.Item>
                 </SubMenu>
-                <SubMenu key="sub2" title={<span><Icon type="appstore" /><span>导航二</span></span>}>
-                    <Menu.Item key="5">选项5</Menu.Item>
-                    <Menu.Item key="6">选项6</Menu.Item>
-                    <SubMenu key="sub3" title="三级导航">
-                        <Menu.Item key="7">选项7</Menu.Item>
-                        <Menu.Item key="8">选项8</Menu.Item>
-                    </SubMenu>
-                </SubMenu>
-                <SubMenu key="sub4" title={<span><Icon type="setting" /><span>导航三</span></span>}>
-                    <Menu.Item key="9">选项9</Menu.Item>
-                    <Menu.Item key="10">选项10</Menu.Item>
-                    <Menu.Item key="11">选项11</Menu.Item>
-                    <Menu.Item key="12">选项12</Menu.Item>
+                <SubMenu key="sub2" title={<span><Icon type="mail" /><span>导航二</span></span>}>
+                    <Menu.Item key="5"><a onClick={this.props.menuFunctionLeft.bind(this, 'teacher')}>教师管理1</a></Menu.Item>
+                    <Menu.Item key="6"><a onClick={this.props.menuFunctionLeft.bind(this, 'student')}>学生管理1</a></Menu.Item>
+                    <Menu.Item key="7"><a onClick={this.props.menuFunctionLeft.bind(this, 'parent')}>家长管理1</a></Menu.Item>
+                    <Menu.Item key="8"><a onClick={this.props.menuFunctionLeft.bind(this, 'classroom')}>班级管理1</a></Menu.Item>
                 </SubMenu>
             </Menu>
         );
