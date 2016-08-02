@@ -64,21 +64,22 @@ module.exports = {
         extensions: ['', '.js', '.jsx']
     },
     //使用的eslint配置文件
-    // eslint:{
-    //     configFile:'.eslintrc'
-    // },
+    eslint: {
+        configFile: './.eslintrc'
+    },
     module:{
         //预编译器eslint代码检查
-        // preLoaders: [
-        //     {
-        //         test:/(\.js$|\.jsx$)/,
-        //         exclude: /node_modules/,
-        //         loader: 'eslint-loader'
-        //     },
-        // ],
+        preLoaders: [
+            {
+                test:/(\.js$|\.jsx$)/,
+                exclude: /node_modules/,
+                loader: 'eslint-loader'
+            },
+        ],
         loaders:[
             {test: /\.css$/, loader: "style!css"},
             {test: /\.(png|jpg)$/, loader: "url-loader?limit=8192"},
+
             //babel
             {
                 test:/(\.js$|\.jsx$)/,

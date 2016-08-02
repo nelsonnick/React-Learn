@@ -1,10 +1,21 @@
-import UserName from "../component/UserName.js"
+import UserName from '../component/UserName.js';
+import React from 'react';
 
-export default class Top extends React.Component {
-
-    render() {
-        return <div id="top">
-            <UserName/>
-        </div>
-    }
+function Top() {
+  return (
+    <div>
+      <UserName name="wts" />
+    </div>
+  );
 }
+export default Top;
+
+// export default class Top extends React.Component {
+//   render() {
+//     return (
+//       <div id="top">
+//         <UserName />
+//       </div>
+//     );
+//   }
+// }
