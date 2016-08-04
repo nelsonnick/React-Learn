@@ -5,14 +5,11 @@ export default class Left extends React.Component {
 
   constructor(props) {
     super(props);
-    this.menuFunctionLeft = 'teacher';
     this.menuFunctionLefts = this.menuFunctionLefts.bind(this);
   }
 
   menuFunctionLefts(functionName) {
-    this.menuFunctionLeft = `Hi, ${functionName}?`;
-    console.log(this.menuFunctionLeft);
-    this.props.menuFunctionAll(this.menuFunctionLeft);
+    this.props.menuFunctionAll(functionName);
   }
 
   render() {

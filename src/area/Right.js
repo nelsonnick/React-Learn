@@ -1,23 +1,24 @@
-import StudentInfoTable from "../component/StudentInfoTable.js"
-import TeacherInfoTable from "../component/TeacherInfoTable.js"
-export default class Left extends React.Component {
-    constructor(props){
-        super(props);
-        this.tables="teacher";
-    };
-    render() {
-        let tableCase;
-        if (this.tables === 'teacher'){
-            tableCase=<TeacherInfoTable/>;
-        }else if (this.tables === 'student'){
-            tableCase=<StudentInfoTable/>;
-        }else{
-            tableCase=<StudentInfoTable/>;
-        }
-        return (
-            <div>
-                {tableCase}
-            </div>
-        )
+import StudentInfoTable from '../component/StudentInfoTable.js';
+import TeacherInfoTable from '../component/TeacherInfoTable.js';
+import React from 'react';
+
+export default class Right extends React.Component {
+  render() {
+    let tableCase;
+    if (this.props.menuFunctionType === 'teacher') {
+      tableCase = <TeacherInfoTable />;
+    } else if (this.props.menuFunctionType === 'student') {
+      tableCase = <StudentInfoTable />;
+    } else {
+      tableCase = <TeacherInfoTable />;
     }
+    return (
+      <div>
+        {tableCase}
+      </div>
+    );
+  }
 }
+Right.propTypes = {
+  menuFunctionType: React.PropTypes.string,
+};
