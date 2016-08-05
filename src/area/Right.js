@@ -1,5 +1,6 @@
 import StudentInfoTable from '../component/StudentInfoTable.js';
 import TeacherInfoTable from '../component/TeacherInfoTable.js';
+import AddPerson from '../component/AddPerson7.js';
 import React from 'react';
 
 export default class Right extends React.Component {
@@ -10,7 +11,7 @@ export default class Right extends React.Component {
     } else if (this.props.menuFunctionType === 'student') {
       tableCase = <StudentInfoTable />;
     } else {
-      tableCase = <TeacherInfoTable />;
+      tableCase = <AddPerson />;
     }
     return (
       <div>

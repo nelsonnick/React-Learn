@@ -37,16 +37,8 @@ export default class SystemMenu extends React.Component {
         mode="inline"
       >
         <SubMenu key="sub1" title={<span><Icon type="mail" /><span>导航一</span></span>}>
-          <Menu.Item key="1"><a onClick={this.props.menuFunctionLeft.bind(this, 'teacher1')}>教师管理1</a></Menu.Item>
-          <Menu.Item key="2"><a onClick={this.props.menuFunctionLeft.bind(this, 'teacher2')}>教师管理2</a></Menu.Item>
-          <Menu.Item key="3"><a onClick={this.props.menuFunctionLeft.bind(this, 'teacher3')}>教师管理3</a></Menu.Item>
-          <Menu.Item key="4"><a onClick={this.props.menuFunctionLeft.bind(this, 'teacher4')}>教师管理4</a></Menu.Item>
-        </SubMenu>
-        <SubMenu key="sub2" title={<span><Icon type="mail" /><span>导航二</span></span>}>
-          <Menu.Item key="5"><a onClick={this.props.menuFunctionLeft.bind(this, 'teacher5')}>教师管理5</a></Menu.Item>
-          <Menu.Item key="6"><a onClick={this.props.menuFunctionLeft.bind(this, 'teacher6')}>教师管理6</a></Menu.Item>
-          <Menu.Item key="7"><a onClick={this.props.menuFunctionLeft.bind(this, 'teacher7')}>教师管理7</a></Menu.Item>
-          <Menu.Item key="8"><a onClick={this.props.menuFunctionLeft.bind(this, 'teacher8')}>教师管理8</a></Menu.Item>
+          <Menu.Item key="1"><a onClick={this.props.menuFunctionLeft.bind(this, 'teacher')}>教师管理</a></Menu.Item>
+          <Menu.Item key="2"><a onClick={this.props.menuFunctionLeft.bind(this, 'student')}>学生管理</a></Menu.Item>
         </SubMenu>
       </Menu>
     );
