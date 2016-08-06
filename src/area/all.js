@@ -30,7 +30,7 @@ class All extends React.Component {
         </Row>
         <Row>
           <Col span={8}><Left menuFunctionAll={this.menuFunctionAlls} /></Col>
-          <Col span={16}><Right menuFunctionType={this.state.menuFunctionType} /></Col>
+          <Col span={8}><Right menuFunctionType={this.state.menuFunctionType} /></Col>
         </Row>
       </div>
     );

@@ -2,6 +2,7 @@ var webpack = require('webpack');
 //var CopyWebpackPlugin=require('copy-webpack-plugin');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var OpenBrowserPlugin= require('open-browser-webpack-plugin');
+var ExtractTextPlugin = require("extract-text-webpack-plugin");
 var path = require('path');
 module.exports = {
     entry: {// 入口文件，单入口 app.js 文件
@@ -44,11 +45,11 @@ module.exports = {
             "process.env": {
                 NODE_ENV: JSON.stringify("production")
             }
-        })
+        }),
         // 分离css
-        //new ExtractTextPlugin('[name].bundle.css', {
-          //  allChunks: true
-        //}),
+        new ExtractTextPlugin('[name].css', {
+           allChunks: true//所有独立样式打包成一个css文件
+        }),
         // 抽取公共资源
         // new webpack.optimize.CommonsChunkPlugin({
         //     // 与 entry 中的 jquery 对应
@@ -78,6 +79,7 @@ module.exports = {
         ],
         loaders:[
             {test: /\.css$/, loader: "style!css"},
+            {test: /\.scss$/, loader: "style!css!sass"},
             {test: /\.(png|jpg)$/, loader: "url-loader?limit=8192"},
 
             //babel
