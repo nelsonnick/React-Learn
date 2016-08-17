@@ -14,6 +14,14 @@ module.exports = {
         filename: "[name].js"
     },
     plugins: [
+      //检测相似的文件或冗余，并消除
+        new webpack.optimize.DedupePlugin(),
+      //安装引用频度排序
+        new webpack.optimize.OccurenceOrderPlugin(),
+      //优化生成的chuck
+        new webpack.optimize.AggressiveMergingPlugin(),
+      //保证变异过程不出错
+        new webpack.NoErrorsPlugin(),
         //自动生成HTML
         new HtmlWebpackPlugin({
             title: 'My App',
@@ -78,9 +86,12 @@ module.exports = {
             },
         ],
         loaders:[
-            {test: /\.css$/, loader: "style!css"},
-            {test: /\.scss$/, loader: "style!css!sass"},
-            {test: /\.(png|jpg)$/, loader: "url-loader?limit=8192"},
+            {test: /\.css$/, loader: "style-loader!css-loader"},
+            {
+                test: /\.scss$/,
+                loader: "style-loader!css-loader!autoprefixer-loader?{browsers:['last 2 version']}!sass-loader"
+            },
+            {test: /\.(png|jpg|woff|woff2)$/, loader: "url-loader?limit=8192"},
 
             //babel
             {
