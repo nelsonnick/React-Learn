@@ -13,12 +13,12 @@ class All extends React.Component {
     this.state = {
       menuFunctionType: '',
     };
-    this.menuFunctionAlls = this.menuFunctionAlls.bind(this);
+    this.setMenuLabel = this.setMenuLabel.bind(this);
   }
-  menuFunctionAlls(functionName) {
+  setMenuLabel(labelName) {
     this.setState(
       {
-        menuFunctionType: functionName,
+        menuFunctionType: labelName,
       }
     );
   }
@@ -29,7 +29,7 @@ class All extends React.Component {
           <Col span={24}><Top /></Col>
         </Row>
         <Row>
-          <Col span={8}><Left menuFunctionAll={this.menuFunctionAlls} /></Col>
+          <Col span={8}><Left menuLabel={this.setMenuLabel} /></Col>
           <Col span={8}><Right menuFunctionType={this.state.menuFunctionType} /></Col>
         </Row>
       </div>

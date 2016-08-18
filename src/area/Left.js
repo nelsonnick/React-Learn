@@ -5,21 +5,21 @@ export default class Left extends React.Component {
 
   constructor(props) {
     super(props);
-    this.menuFunctionLefts = this.menuFunctionLefts.bind(this);
+    this.setMenuLabel = this.setMenuLabel.bind(this);
   }
 
-  menuFunctionLefts(functionName) {
-    this.props.menuFunctionAll(functionName);
+  setMenuLabel(labelName) {
+    this.props.menuLabel(labelName);
   }
 
   render() {
     return (
       <div>
-        <SystemMenu menuFunctionLeft={this.menuFunctionLefts} />
+        <SystemMenu menuLabel={this.setMenuLabel} />
       </div>
     );
   }
 }
 Left.propTypes = {
-  menuFunctionAll: React.PropTypes.func,
+  menuLabel: React.PropTypes.func,
 };
