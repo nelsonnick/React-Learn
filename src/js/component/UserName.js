@@ -1,5 +1,5 @@
 import React from 'react';
-import '../css/test.css';
+import '../../css/test.css';
 // const a = {
 //   'font-size': '50px',
 //   color: 'red',

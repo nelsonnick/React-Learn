@@ -4,7 +4,7 @@ const FormItem = Form.Item;
 const Option = Select.Option;
 const RadioGroup = Radio.Group;
 
-class AddPerson extends React.Component {
+class DocChan extends React.Component {
   constructor(props) {
     super(props);
     this.handleSelectChange = this.handleSelectChange.bind(this);
@@ -83,8 +83,8 @@ class AddPerson extends React.Component {
     );
   }
 }
-AddPerson = Form.create({})(AddPerson);
-export default AddPerson;
-AddPerson.propTypes = {
+DocChan = Form.create({})(DocChan);
+export default DocChan;
+DocChan.propTypes = {
   form: React.PropTypes.object,
 };

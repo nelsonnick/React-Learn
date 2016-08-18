@@ -5,7 +5,7 @@ const FormItem = Form.Item;
 function noop() {
   return false;
 }
-class AddPerson extends React.Component {
+class PerChan extends React.Component {
   constructor(props) {
     super(props);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -183,8 +183,8 @@ class AddPerson extends React.Component {
   }
 }
 
-AddPerson = Form.create({})(AddPerson);
-export default AddPerson;
-AddPerson.propTypes = {
+PerChan = Form.create({})(PerChan);
+export default PerChan;
+PerChan.propTypes = {
   form: React.PropTypes.object,
 };

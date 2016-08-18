@@ -7,7 +7,7 @@ var path = require('path');
 module.exports = {
   entry: {// 入口文件，单入口 app.js 文件
     //app: './src/js/tt.js'
-    all: './src/area/All.js'
+    all: './src/js/area/All.js'
   },
   output: {
     path:__dirname + '/dist/',

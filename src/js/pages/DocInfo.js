@@ -4,7 +4,7 @@ const FormItem = Form.Item;
 const RadioGroup = Radio.Group;
 
 
-class AddPerson extends React.Component {
+class DocInfo extends React.Component {
   constructor(props) {
     super(props);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -64,8 +64,8 @@ class AddPerson extends React.Component {
 }
 
 
-AddPerson = Form.create({})(AddPerson);
-export default AddPerson;
-AddPerson.propTypes = {
+DocInfo = Form.create({})(DocInfo);
+export default DocInfo;
+DocInfo.propTypes = {
   form: React.PropTypes.object,
 };

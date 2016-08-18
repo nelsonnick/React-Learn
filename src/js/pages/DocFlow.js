@@ -12,7 +12,7 @@ const selectAfter = (
     <Option value=".org">.org</Option>
   </Select>
 );
-class AddPerson extends React.Component {
+class DocFlow extends React.Component {
   render() {
     return (
       <Form horizontal>
@@ -89,8 +89,8 @@ class AddPerson extends React.Component {
     );
   }
 }
-AddPerson = Form.create({})(AddPerson);
-export default AddPerson;
-AddPerson.propTypes = {
+DocFlow = Form.create({})(DocFlow);
+export default DocFlow;
+DocFlow.propTypes = {
   form: React.PropTypes.object,
 };

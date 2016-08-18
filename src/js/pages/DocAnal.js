@@ -4,7 +4,7 @@ const Option = Select.Option;
 const RadioGroup = Radio.Group;
 const FormItem = Form.Item;
 
-class AddPerson extends React.Component {
+class DocAnal extends React.Component {
   constructor(props) {
     super(props);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -206,8 +206,8 @@ class AddPerson extends React.Component {
   }
 }
 
-AddPerson = Form.create({})(AddPerson);
-export default AddPerson;
-AddPerson.propTypes = {
+DocAnal = Form.create({})(DocAnal);
+export default DocAnal;
+DocAnal.propTypes = {
   form: React.PropTypes.object,
 };

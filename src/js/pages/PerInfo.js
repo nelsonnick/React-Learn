@@ -19,7 +19,7 @@ const areaData = [{
   }],
 }];
 
-class AddPerson extends React.Component {
+class PerInfo extends React.Component {
   constructor(props) {
     super(props);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -183,8 +183,8 @@ class AddPerson extends React.Component {
   }
 }
 
-AddPerson = Form.create({})(AddPerson);
-export default AddPerson;
-AddPerson.propTypes = {
+PerInfo = Form.create({})(PerInfo);
+export default PerInfo;
+PerInfo.propTypes = {
   form: React.PropTypes.object,
 };

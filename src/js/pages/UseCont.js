@@ -1,5 +1,5 @@
 import React from 'react';
-export default class TeacherInfoTable extends React.Component {
+export default class UseCont extends React.Component {
   render() {
     return (
       <div>

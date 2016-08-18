@@ -36,7 +36,7 @@ const pagination = {
   },
 };
 
-export default class StudentInfoTable extends React.Component {
+export default class PerAnal extends React.Component {
   render() {
     return (
       <div>
