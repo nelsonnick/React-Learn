@@ -1,8 +1,6 @@
 import { Menu, Icon } from 'antd';
 import React from 'react';
-import MenuLabel from './MenuLabel.js';
 const SubMenu = Menu.SubMenu;
-
 
 export default class SystemMenu extends React.Component {
   constructor(props) {
@@ -13,7 +11,6 @@ export default class SystemMenu extends React.Component {
     };
     this.onToggle = this.onToggle.bind(this);
     this.handleClick = this.handleClick.bind(this);
-    this.setMenuLabel = this.setMenuLabel.bind(this);
   }
 
   componentDidMount() {
@@ -24,11 +21,6 @@ export default class SystemMenu extends React.Component {
     this.setState({
       openKeys: info.open ? info.keyPath : info.keyPath.slice(1),
     });
-  }
-
-
-  setMenuLabel(labelName) {
-    console.log(labelName);
   }
 
   handleClick(e) {
@@ -47,10 +39,10 @@ export default class SystemMenu extends React.Component {
         const getSubMenu = [];
         for (let i = 0; i < rolePower[j].Data.length; i++) {
           if (rolePower[j].Data[i].Stat) {
-            getSubMenu.push(<Menu.Item key={rolePower[j].Data[i].Func}><span><Icon type={rolePower[j].Data[i].Type} /><MenuLabel menuLabel={this.setMenuLabel} menuLabelFunction={rolePower[j].Data[i].Func} menuLabelName={rolePower[j].Data[i].Name} /></span></Menu.Item>);
+            getSubMenu.push(<Menu.Item key={rolePower[j].Data[i].Func}><span><Icon type={rolePower[j].Data[i].Type} />{rolePower[j].Data[i].Name}</span></Menu.Item>);
           }
         }
-        getMenu.push(<SubMenu key={rolePower[j].Func} title={<span><Icon type={rolePower[j].Type} /><MenuLabel menuLabel={this.setMenuLabel} menuLabelFunction={rolePower[j].Func} menuLabelName={rolePower[j].Name} /></span>} children={getSubMenu} />);
+        getMenu.push(<SubMenu key={rolePower[j].Func} title={<span><Icon type={rolePower[j].Type} />{rolePower[j].Name}</span>} children={getSubMenu} />);
       }
     }
     return (
