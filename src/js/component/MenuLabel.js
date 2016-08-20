@@ -6,7 +6,7 @@ export default class MenuLabel extends React.Component {
   render() {
     const { menuLabel, menuLabelFunction, menuLabelName } = this.props;
     return (
-      <a onClick={() => menuLabel(menuLabelFunction)}>{menuLabelName}</a>
+      <span onClick={() => menuLabel(menuLabelFunction)}>{menuLabelName}</span>
     );
   }
 }
