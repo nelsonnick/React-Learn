@@ -59,6 +59,7 @@ export default class DepContTable extends React.Component {
           <Popconfirm title="确定要删除这个任务吗？" onConfirm={this.confirm} onCancel={this.cancel}>
             <a href="#">停用：{record.name}</a>
           </Popconfirm>
+          <span className="ant-divider" />
         </span>
       ),
     }];
