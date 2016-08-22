@@ -54,7 +54,7 @@ export default class DepContTable extends React.Component {
         <span>
           <a href="#" onClick={() => this.cc(record.key)}>查看详情</a>
           <span className="ant-divider" />
-          <a href="#">部门修改</a>
+          <a href="#" onClick={() => this.cc(record.phone)}>部门修改</a>
           <span className="ant-divider" />
           <Popconfirm title="确定要删除这个任务吗？" onConfirm={this.confirm} onCancel={this.cancel}>
             <a href="#">停用：{record.name}</a>
