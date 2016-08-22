@@ -8,7 +8,7 @@ export default class Paginate extends React.Component {
         <Pagination
           showQuickJumper
           defaultCurrent={1}
-          total={500}
+          total={50}
           showTotal={total => `共 ${total} 条`}
           selectComponentClass={Select}
         />

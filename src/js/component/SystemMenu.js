@@ -48,7 +48,7 @@ export default class SystemMenu extends React.Component {
     return (
       <Menu
         onClick={this.handleClick}
-        style={{ width: 240 }}
+        style={{ width: 160 }}
         openKeys={this.state.openKeys}
         onOpen={this.onToggle}
         onClose={this.onToggle}

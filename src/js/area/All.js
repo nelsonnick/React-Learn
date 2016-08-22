@@ -29,8 +29,8 @@ class All extends React.Component {
           <Col span={24}><Top /></Col>
         </Row>
         <Row>
-          <Col span={8}><Left menuLabel={this.setMenuLabel} /></Col>
-          <Col span={8}><Right menuFunctionType={this.state.menuFunctionType} /></Col>
+          <Col span={4}><Left menuLabel={this.setMenuLabel} /></Col>
+          <Col span={19}><Right menuFunctionType={this.state.menuFunctionType} /></Col>
         </Row>
       </div>
     );
