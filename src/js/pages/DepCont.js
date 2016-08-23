@@ -18,12 +18,12 @@ export default class DepCont extends React.Component {
       'url': '/getList',
       'dataType': 'json',
       'success': () => {
-        console.log("success");
+        console.log('success');
       },
       'error': () => {
-        console.log("error");
+        console.log('error');
       },
-    })
+    });
   }
   getQuery(queryString) {
     console.log(queryString);
