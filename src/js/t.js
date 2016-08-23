@@ -40,7 +40,20 @@ var rrr = [
     ],
   },
 ];
-
+const tableData = [
+  { key: '1',
+    name: '胡彦斌',
+    phone: '0531-87654321',
+    address: '西湖区湖底公园1号',
+    state: '可用',
+  },
+  { key: '2',
+    name: '胡彦斌',
+    phone: '0531-87654321',
+    address: '西湖区湖底公园1号',
+    state: '不可用',
+  },
+];
 for (var j = 0; j < rrr.length; j++) {
   if (rrr[j].Stat) {
     console.log(rrr[j].Func, rrr[j].Name);

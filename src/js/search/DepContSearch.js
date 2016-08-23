@@ -9,7 +9,7 @@ class DepContSearch extends React.Component {
   }
   handleSubmit(e) {
     e.preventDefault();
-    console.log('收到表单值：', this.props.form.getFieldsValue());
+    this.props.setQuery(this.props.form.getFieldValue('depName'));
   }
 
   render() {
@@ -27,5 +27,6 @@ class DepContSearch extends React.Component {
 DepContSearch = Form.create({})(DepContSearch);
 export default DepContSearch;
 DepContSearch.propTypes = {
+  setQuery: React.PropTypes.func,
   form: React.PropTypes.object,
 };
