@@ -1,24 +1,31 @@
 import React from 'react';
 import { Row } from 'antd';
-import DepContTable from '../table/DepContTable.js';
-import DepContSearch from '../search/DepContSearch.js';
-import Paginate from '../component/Paginate.js';
+import DataTable from './DataTable.js';
+import DataSearch from './DataSearch.js';
+import DataPagination from './DataPagination.js';
 import $ from 'jquery';
 
-let tableData;
 export default class DepCont extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      DataTable: [],
+    };
     this.getQuery = this.getQuery.bind(this);
-    this.fetch = this.fetch.bind(this);
   }
+
   componentWillMount() {
-    tableData = $.ajax({
+    $.ajax({
       'type': 'POST',
       'url': '/getList',
       'dataType': 'json',
-      'success': () => {
-        console.log('success');
+      'data': { 'id': '1' },
+      'success': (data) => {
+        this.setState(
+          {
+            DataTable: data,
+          }
+        );
       },
       'error': () => {
         console.log('error');
@@ -33,19 +40,19 @@ export default class DepCont extends React.Component {
     return (
       <div>
         <Row>
-          <DepContSearch setQuery={this.getQuery} />
+          <DataSearch setQuery={this.getQuery} />
         </Row>
         <Row>
           <span style={{ 'font-size': '36px' }}>&nbsp;&nbsp;&nbsp;</span>
         </Row>
         <Row>
-          <DepContTable tableData={tableData} />
+          <DataTable tableData={this.state.DataTable} />
         </Row>
         <Row>
           <span style={{ 'font-size': '36px' }}>&nbsp;&nbsp;&nbsp;</span>
         </Row>
         <Row>
-          <Paginate />
+          <DataPagination />
         </Row>
       </div>
     );

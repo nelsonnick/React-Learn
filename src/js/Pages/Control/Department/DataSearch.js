@@ -2,7 +2,7 @@ import React from 'react';
 import { Form, Input, Button } from 'antd';
 const FormItem = Form.Item;
 
-class DepContSearch extends React.Component {
+class DataSearch extends React.Component {
   constructor(props) {
     super(props);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -24,9 +24,9 @@ class DepContSearch extends React.Component {
     );
   }
 }
-DepContSearch = Form.create({})(DepContSearch);
-export default DepContSearch;
-DepContSearch.propTypes = {
+DataSearch = Form.create({})(DataSearch);
+export default DataSearch;
+DataSearch.propTypes = {
   setQuery: React.PropTypes.func,
   form: React.PropTypes.object,
 };

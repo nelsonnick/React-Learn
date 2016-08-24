@@ -2,7 +2,7 @@ import { Form, Input, Button, Checkbox } from 'antd';
 import React from 'react';
 const FormItem = Form.Item;
 
-class PasCont extends React.Component {
+class PassCont extends React.Component {
   constructor(props) {
     super(props);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -41,8 +41,8 @@ class PasCont extends React.Component {
   }
 }
 
-PasCont = Form.create({})(PasCont);
-export default PasCont;
-PasCont.propTypes = {
+PassCont = Form.create({})(PassCont);
+export default PassCont;
+PassCont.propTypes = {
   form: React.PropTypes.object,
 };

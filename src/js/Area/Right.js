@@ -1,17 +1,17 @@
 import React from 'react';
-import Blank from '../pages/Blank.js';
-import DocInfo from '../pages/DocInfo.js';
-import DocChan from '../pages/DocChan.js';
-import DocFlow from '../pages/DocFlow.js';
-import PerInfo from '../pages/PerInfo.js';
-import PerChan from '../pages/PerChan.js';
-import DocAnal from '../pages/DocAnal.js';
-import PerAnal from '../pages/PerAnal.js';
-import OpeAnal from '../pages/OpeAnal.js';
-import PasCont from '../pages/PasCont.js';
-import DepCont from '../pages/DepCont.js';
-import UseCont from '../pages/UseCont.js';
-import RolCont from '../pages/RolCont.js';
+import Blank from '../Pages/Others/Blank.js';
+import DocInfo from '../Pages/Document/Information/DocInfo.js';
+import DocChan from '../Pages/Document/Change/DocChan.js';
+import DocFlow from '../Pages/Document/Flow/DocFlow.js';
+import PerInfo from '../Pages/Person/Information/PerInfo.js';
+import PerChan from '../Pages/Person/Change/PerChan.js';
+import DocAnal from '../Pages/Analysis/Document/DocAnal.js';
+import PerAnal from '../Pages/Analysis/Person/PerAnal.js';
+import OpeAnal from '../Pages/Analysis/Operation/OpeAnal.js';
+import PasCont from '../Pages/Control/Password/PassCont.js';
+import DepCont from '../Pages/Control/Department/Main.js';
+import UseCont from '../Pages/Control/User/UserCont.js';
+import RolCont from '../Pages/Control/Role/RoleCont.js';
 export default class Right extends React.Component {
   render() {
     let tableCase;

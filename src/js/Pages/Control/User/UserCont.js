@@ -1,6 +1,6 @@
 import React from 'react';
-import UserContTable from '../table/UseContTable.js';
-export default class UseCont extends React.Component {
+import UserContTable from './UserContTable.js';
+export default class UserCont extends React.Component {
   render() {
     return (
       <div>

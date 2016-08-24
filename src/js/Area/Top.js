@@ -1,4 +1,4 @@
-import UserName from '../component/UserName.js';
+import UserName from '../Component/UserName.js';
 import React from 'react';
 
 function Top() {

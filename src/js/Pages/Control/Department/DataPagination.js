@@ -1,7 +1,7 @@
 import React from 'react';
 import { Pagination, Select } from 'antd';
 
-export default class Paginate extends React.Component {
+export default class DataPagination extends React.Component {
   render() {
     return (
       <div>

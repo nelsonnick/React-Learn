@@ -2,7 +2,7 @@ import React from 'react';
 import { Table, Popconfirm, message } from 'antd';
 
 
-export default class DepContTable extends React.Component {
+export default class DataTable extends React.Component {
   constructor(props) {
     super(props);
     this.confirm = this.confirm.bind(this);
@@ -75,6 +75,6 @@ export default class DepContTable extends React.Component {
   }
 }
 
-DepContTable.propTypes = {
+DataTable.propTypes = {
   tableData: React.PropTypes.array,
 };
