@@ -1,8 +1,6 @@
 import { Modal, Button } from 'antd';
-import $ from 'jquery';
 import React from 'react';
-
-
+import AddForm from './AddForm';
 export default class AddButton extends React.Component {
   constructor(props) {
     super(props);
@@ -22,11 +20,11 @@ export default class AddButton extends React.Component {
   }
 
   handleOk() {
+    console.log(document.getElementById('departmentName').value);
     this.setState({
       ModalText: '对话框将在两秒后关闭',
-      confirmLoading: true,
+      confirmLoading: false,
     });
-
   }
 
   handleCancel() {
@@ -40,13 +38,15 @@ export default class AddButton extends React.Component {
     return (
       <div>
         <Button type="primary" onClick={this.showModal}>新增部门</Button>
-        <Modal title="对话框标题"
-               visible={this.state.visible}
-               onOk={this.handleOk}
-               confirmLoading={this.state.confirmLoading}
-               onCancel={this.handleCancel}
+        <Modal
+          maskClosable={false}
+          title="新增部门"
+          visible={this.state.visible}
+          onOk={this.handleOk}
+          confirmLoading={this.state.confirmLoading}
+          onCancel={this.handleCancel}
         >
-          <p>{this.state.ModalText}</p>
+          <AddForm />
         </Modal>
       </div>
     );

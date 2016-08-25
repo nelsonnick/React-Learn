@@ -3,6 +3,7 @@ import { Row } from 'antd';
 import DataTable from './DataTable.js';
 import DataSearch from './DataSearch.js';
 import DataPagination from './DataPagination.js';
+import AddButton from './AddButton.js';
 import $ from 'jquery';
 
 export default class DepCont extends React.Component {
@@ -39,6 +40,9 @@ export default class DepCont extends React.Component {
   render() {
     return (
       <div>
+        <Row>
+          <AddButton />
+        </Row>
         <Row>
           <DataSearch setQuery={this.getQuery} />
         </Row>
