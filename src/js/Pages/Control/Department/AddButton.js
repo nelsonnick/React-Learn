@@ -28,7 +28,7 @@ export default class AddButton extends React.Component {
   }
 
   handleCancel() {
-    console.log('点击了取消');
+    console.log(this.refs.AddForm.resetFields());
     this.setState({
       visible: false,
     });
@@ -46,7 +46,7 @@ export default class AddButton extends React.Component {
           confirmLoading={this.state.confirmLoading}
           onCancel={this.handleCancel}
         >
-          <AddForm />
+          <AddForm ref="AddForm" />
         </Modal>
       </div>
     );

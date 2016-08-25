@@ -10,18 +10,21 @@ class AddFrom extends React.Component {
       visible: false,
     };
     this.departmentNameCheck = this.departmentNameCheck.bind(this);
+    this.resetForm = this.resetForm.bind(this);
+  }
+  resetForm(e) {
+    e.preventDefault();
+    this.props.form.resetFields();
   }
   departmentNameCheck(rule, value, callback) {
     if (!value) {
       callback();
     } else {
-      setTimeout(() => {
-        if (value === 'nn') {
-          callback([new Error('抱歉，该用户名已被占用。')]);
-        } else {
-          callback();
-        }
-      }, 800);
+      if (/^[\u4e00-\u9fa5]{0,}$/.test(value)) {
+        callback();
+      } else {
+        callback(new Error('所输入内容不是汉字！'));
+      }
     }
   }
 
@@ -34,7 +37,7 @@ class AddFrom extends React.Component {
     };
     const departmentNameProps = getFieldProps('departmentName', {
       rules: [
-        { required: true, min: 5, message: '部门名称至少为 3 个字符' },
+        { required: true, min: 3, message: '部门名称至少为 3 个汉字' },
         { validator: this.departmentNameCheck },
       ],
     });
