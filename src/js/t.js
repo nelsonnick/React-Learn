@@ -1,5 +1,5 @@
 var rrr = [
-  { 'Func': 'Doc',
+  { 'Func': 'Document',
     'Name': '档案管理',
     'Type': 'file',
     'Stat': true,
@@ -9,7 +9,7 @@ var rrr = [
       { 'Func': 'DocFlow', 'Name': '档案流动', 'Stat': true, 'Type': 'mail' },
     ],
   },
-  { 'Func': 'Per',
+  { 'Func': 'Person',
     'Name': '人员管理',
     'Type': 'team',
     'Stat': true,
@@ -18,17 +18,17 @@ var rrr = [
       { 'Func': 'PerChan', 'Name': '信息变更', 'Stat': true, 'Type': 'book' },
     ],
   },
-  { 'Func': 'Anal',
+  { 'Func': 'Analysis',
     'Name': '统计分析',
     'Type': 'pie-chart',
     'Stat': true,
     'Data': [
-      { 'Func': 'DocAnal', 'Name': '档案分析', 'Stat': true, 'Type': 'area-chart' },
+      { 'Func': 'DocAnal', 'Name': '档案分析', 'Stat': true, 'Type': 'Area-chart' },
       { 'Func': 'PerAnal', 'Name': '人员分析', 'Stat': true, 'Type': 'bar-chart' },
       { 'Func': 'OpeAnal', 'Name': '业务分析', 'Stat': true, 'Type': 'line-chart' },
     ],
   },
-  { 'Func': 'Cont',
+  { 'Func': 'Control',
     'Name': '系统管理',
     'Type': 'setting',
     'Stat': true,
@@ -40,7 +40,20 @@ var rrr = [
     ],
   },
 ];
-
+const tableData = [
+  { key: '1',
+    name: '胡彦斌',
+    phone: '0531-87654321',
+    address: '西湖区湖底公园1号',
+    state: '可用',
+  },
+  { key: '2',
+    name: '胡彦斌',
+    phone: '0531-87654321',
+    address: '西湖区湖底公园1号',
+    state: '不可用',
+  },
+];
 for (var j = 0; j < rrr.length; j++) {
   if (rrr[j].Stat) {
     console.log(rrr[j].Func, rrr[j].Name);
