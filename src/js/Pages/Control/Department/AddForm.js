@@ -47,7 +47,7 @@ class AddFrom extends React.Component {
           required
           help={isFieldValidating('departmentName') ? '校验中...' : (getFieldError('departmentName') || []).join(', ')}
         >
-          <Input id="departmentName" placeholder="请输入部门的中文全称" {...getFieldProps('departmentName')} {...departmentNameProps} />
+          <Input id="departmentName" placeholder="请输入部门的中文全称" {...departmentNameProps} />
         </FormItem>
         <FormItem
           label="部门电话"
