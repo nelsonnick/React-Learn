@@ -1,7 +1,9 @@
 import React from 'react';
 import { Form, Input, Select } from 'antd';
+import $ from 'jquery';
 const FormItem = Form.Item;
 const Option = Select.Option;
+import * as AjaxFunction from '../../../Util/AjaxFunction.js';
 class AddFrom extends React.Component {
   constructor(props) {
     super(props);
@@ -10,21 +12,28 @@ class AddFrom extends React.Component {
       visible: false,
     };
     this.departmentNameCheck = this.departmentNameCheck.bind(this);
-    this.resetForm = this.resetForm.bind(this);
   }
-  resetForm(e) {
-    e.preventDefault();
-    this.props.form.resetFields();
-  }
+
   departmentNameCheck(rule, value, callback) {
     if (!value) {
       callback();
     } else {
-      if (/^[\u4e00-\u9fa5]{0,}$/.test(value)) {
-        callback();
-      } else {
-        callback(new Error('所输入内容不是汉字！'));
-      }
+      $.ajax({
+        'type': 'POST',
+        'url': AjaxFunction.DepartmentName,
+        'dataType': 'json',
+        'data': { 'name': value },
+        'success': (data) => {
+          if (data === '正常') {
+            callback();
+          } else {
+            callback(new Error(data));
+          }
+        },
+        'error': () => {
+          callback(new Error('无法执行后台验证，请重试'));
+        },
+      });
     }
   }
 
@@ -48,9 +57,9 @@ class AddFrom extends React.Component {
           {...formItemLayout}
           hasFeedback
           required
-          help={isFieldValidating('departmentName') ? '校验中...' : (getFieldError('departmentName') || []).join(', ')}
+          help={isFieldValidating('departmentName') ? '校验中...' : (getFieldError('departmentName') || [])}
         >
-          <Input id="departmentName" placeholder="请输入部门的中文全称" {...departmentNameProps} />
+          <Input id="departmentName" placeholder="请输入部门的中文全称" maxlength="10" {...departmentNameProps} />
         </FormItem>
         <FormItem
           label="部门电话"
@@ -58,7 +67,7 @@ class AddFrom extends React.Component {
           hasFeedback
           required
         >
-          <Input id="departmentPhone" placeholder="请输入部门的8位固定电话" {...getFieldProps('departmentPhone')} />
+          <Input id="departmentPhone" placeholder="请输入部门的固定电话，格式为：4位区号-8位固话" maxlength="13" />
         </FormItem>
         <FormItem
           label="部门地址"
@@ -66,16 +75,16 @@ class AddFrom extends React.Component {
           hasFeedback
           required
         >
-          <Input id="departmentAddress" placeholder="请输入详细地址" {...getFieldProps('departmentAddress')} />
+          <Input id="departmentAddress" placeholder="请输入详细地址" />
         </FormItem>
         <FormItem
           label="部门状态"
           {...formItemLayout}
           required
         >
-          <Select id="departmentState" size="large" defaultValue="1" {...getFieldProps('departmentState')} >
-            <Option value="1">可用</Option>
-            <Option value="0">不可用</Option>
+          <Select id="departmentState" size="large" defaultValue="1" >
+            <Option value="1">激活</Option>
+            <Option value="0">注销</Option>
           </Select>
         </FormItem>
         <FormItem
@@ -83,7 +92,7 @@ class AddFrom extends React.Component {
           {...formItemLayout}
           hasFeedback
         >
-          <Input type="textarea" id="departmentOther" rows="3" placeholder="其他需要填写的信息" {...getFieldProps('departmentOther')} />
+          <Input type="textarea" id="departmentOther" rows="3" placeholder="其他需要填写的信息" />
         </FormItem>
       </Form>
     );

@@ -11,6 +11,7 @@ export default class AddButton extends React.Component {
     this.showModal = this.showModal.bind(this);
     this.handleOk = this.handleOk.bind(this);
     this.handleCancel = this.handleCancel.bind(this);
+    this.handleReset = this.handleReset.bind(this);
   }
 
   showModal() {
@@ -20,18 +21,30 @@ export default class AddButton extends React.Component {
   }
 
   handleOk() {
-    console.log(document.getElementById('departmentName').value);
-    this.setState({
-      ModalText: '对话框将在两秒后关闭',
-      confirmLoading: false,
+    console.log(this.refs.AddForm.getFieldValue('departmentName'));
+    this.refs.AddForm.validateFields((errors, values) => {
+      if (!!errors) {
+        console.log('Errors in form!!!');
+        return;
+      }
+      console.log(values);
+      this.setState({
+        visible: false,
+        confirmLoading: false,
+      });
+      this.refs.AddForm.resetFields();
     });
   }
 
   handleCancel() {
-    console.log(this.refs.AddForm.resetFields());
+    this.refs.AddForm.resetFields();
     this.setState({
       visible: false,
     });
+  }
+
+  handleReset() {
+    this.refs.AddForm.resetFields();
   }
 
   render() {
@@ -45,6 +58,11 @@ export default class AddButton extends React.Component {
           onOk={this.handleOk}
           confirmLoading={this.state.confirmLoading}
           onCancel={this.handleCancel}
+          footer={[
+            <Button key="back" size="large" onClick={this.handleCancel}>返 回</Button>,
+            <Button key="reset" type="ghost" size="large" onClick={this.handleReset}>重 置</Button>,
+            <Button key="submit" type="primary" size="large" loading={this.state.loading} onClick={this.handleOk}>提 交</Button>,
+          ]}
         >
           <AddForm ref="AddForm" />
         </Modal>

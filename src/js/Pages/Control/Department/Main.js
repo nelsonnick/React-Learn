@@ -4,6 +4,7 @@ import DataTable from './DataTable.js';
 import DataSearch from './DataSearch.js';
 import DataPagination from './DataPagination.js';
 import AddButton from './AddButton.js';
+import * as AjaxFunction from '../../../Util/AjaxFunction.js';
 import $ from 'jquery';
 
 export default class DepCont extends React.Component {
@@ -18,9 +19,9 @@ export default class DepCont extends React.Component {
   componentWillMount() {
     $.ajax({
       'type': 'POST',
-      'url': '/getList',
+      'url': AjaxFunction.DepartmentInit,
       'dataType': 'json',
-      'data': { 'id': '1' },
+      // 'data': { 'id': '1' },
       'success': (data) => {
         this.setState(
           {
@@ -29,7 +30,7 @@ export default class DepCont extends React.Component {
         );
       },
       'error': () => {
-        console.log('error');
+        console.log('未查到数据');
       },
     });
   }

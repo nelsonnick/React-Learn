@@ -1,0 +1,13 @@
+export const DepartmentInit = '/department/init';            // 数据初始     --参数：无
+export const DepartmentCount = '/department/count';          // 数据总数     --参数：无
+export const DepartmentQuery = '/department/query';          // 数据查询     --参数：queryName
+export const DepartmentPaginate = '/department/paginate';    // 数据分页     --参数：queryName,pageNumber
+export const DepartmentLook = '/department/look';            // 查看部门     --参数：id
+export const DepartmentAdd = '/department/add';              // 添加部门     --参数：name,address,phone,other,active
+export const DepartmentEdit = '/department/edit';            // 修改部门     --参数：id,name,address,phone,other,active
+export const DepartmentDelete = '/department/delete';        // 删除部门     --参数：id
+export const DepartmentActive = '/department/active';        // 激活部门     --参数：id
+export const DepartmentCancel = '/department/cancel';        // 注销部门     --参数：id
+export const DepartmentName = '/department/name';            // 检测姓名     --参数：name
+export const DepartmentAddress = '/department/address';      // 检测地址     --参数：address
+export const DepartmentPhone = '/department/phone';          // 检测电话     --参数：phone
