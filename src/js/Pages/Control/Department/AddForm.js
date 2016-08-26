@@ -59,7 +59,7 @@ class AddFrom extends React.Component {
           required
           help={isFieldValidating('departmentName') ? '校验中...' : (getFieldError('departmentName') || [])}
         >
-          <Input id="departmentName" placeholder="请输入部门的中文全称" maxlength="10" {...departmentNameProps} />
+          <Input id="departmentName" placeholder="请输入部门的中文全称" {...departmentNameProps} />
         </FormItem>
         <FormItem
           label="部门电话"
@@ -67,7 +67,7 @@ class AddFrom extends React.Component {
           hasFeedback
           required
         >
-          <Input id="departmentPhone" placeholder="请输入部门的固定电话，格式为：4位区号-8位固话" maxlength="13" />
+          <Input id="departmentPhone" placeholder="请输入部门的固定电话，格式为：4位区号-8位固话" />
         </FormItem>
         <FormItem
           label="部门地址"

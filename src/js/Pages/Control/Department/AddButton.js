@@ -1,6 +1,14 @@
-import { Modal, Button } from 'antd';
+import { Modal, Button, notification } from 'antd';
 import React from 'react';
 import AddForm from './AddForm';
+
+const openNotificationWithIcon = (type, msg, desc) => {
+  notification[type]({
+    message: msg,
+    description: desc,
+  });
+};
+
 export default class AddButton extends React.Component {
   constructor(props) {
     super(props);
@@ -24,7 +32,7 @@ export default class AddButton extends React.Component {
     console.log(this.refs.AddForm.getFieldValue('departmentName'));
     this.refs.AddForm.validateFields((errors, values) => {
       if (!!errors) {
-        console.log('Errors in form!!!');
+        openNotificationWithIcon('error', '录入错误', '录入的信息中有错误，请核实后再更新');
         return;
       }
       console.log(values);
@@ -46,6 +54,7 @@ export default class AddButton extends React.Component {
   handleReset() {
     this.refs.AddForm.resetFields();
   }
+
 
   render() {
     return (
