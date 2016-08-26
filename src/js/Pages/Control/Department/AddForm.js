@@ -1,16 +1,13 @@
 import React from 'react';
-import { Form, Input, Select } from 'antd';
+import { Form, Input, Select, Col } from 'antd';
 import $ from 'jquery';
 const FormItem = Form.Item;
 const Option = Select.Option;
+const InputGroup = Input.Group;
 import * as AjaxFunction from '../../../Util/AjaxFunction.js';
 class AddFrom extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      ModalText: '对话框的内容',
-      visible: false,
-    };
     this.departmentNameCheck = this.departmentNameCheck.bind(this);
   }
 
@@ -67,7 +64,17 @@ class AddFrom extends React.Component {
           hasFeedback
           required
         >
-          <Input id="departmentPhone" placeholder="请输入部门的固定电话，格式为：4位区号-8位固话" />
+          <InputGroup>
+            <Col span="6">
+              <Input id="departmentPhone1" defaultValue="0531" placeholder="2位或3位区号" />
+            </Col>
+            <Col span="4">
+              <span>---</span>
+            </Col>
+            <Col span="16">
+              <Input id="departmentPhone2" placeholder="7位或8位固定电话" />
+            </Col>
+          </InputGroup>
         </FormItem>
         <FormItem
           label="部门地址"

@@ -13,7 +13,6 @@ export default class AddButton extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      ModalText: '对话框的内容',
       visible: false,
     };
     this.showModal = this.showModal.bind(this);

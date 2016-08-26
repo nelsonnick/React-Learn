@@ -1,5 +1,5 @@
 import React from 'react';
-import { Row } from 'antd';
+import { Row, Col } from 'antd';
 import DataTable from './DataTable.js';
 import DataSearch from './DataSearch.js';
 import DataPagination from './DataPagination.js';
@@ -42,13 +42,11 @@ export default class DepCont extends React.Component {
     return (
       <div>
         <Row>
-          <AddButton />
+          <Col span={4}><AddButton /></Col>
+          <Col span={6} offset={14}><DataSearch setQuery={this.getQuery} /></Col>
         </Row>
         <Row>
-          <DataSearch setQuery={this.getQuery} />
-        </Row>
-        <Row>
-          <span style={{ 'font-size': '36px' }}>&nbsp;&nbsp;&nbsp;</span>
+          <span style={{ 'font-size': '20px' }}>&nbsp;&nbsp;&nbsp;</span>
         </Row>
         <Row>
           <DataTable tableData={this.state.DataTable} />
