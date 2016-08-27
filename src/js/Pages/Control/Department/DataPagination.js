@@ -1,10 +1,10 @@
 import React from 'react';
-import { Pagination, Select } from 'antd';
+import { Pagination, Select, Row } from 'antd';
 
 export default class DataPagination extends React.Component {
   render() {
     return (
-      <div>
+      <Row type="flex" justify="end">
         <Pagination
           showQuickJumper
           defaultCurrent={1}
@@ -12,7 +12,7 @@ export default class DataPagination extends React.Component {
           showTotal={total => `共 ${total} 条`}
           selectComponentClass={Select}
         />
-      </div>
+      </Row>
     );
   }
 }

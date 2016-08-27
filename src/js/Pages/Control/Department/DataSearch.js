@@ -1,5 +1,5 @@
 import React from 'react';
-import { Form, Input, Button } from 'antd';
+import { Row, Form, Input, Button } from 'antd';
 const FormItem = Form.Item;
 
 class DataSearch extends React.Component {
@@ -15,12 +15,14 @@ class DataSearch extends React.Component {
   render() {
     const { getFieldProps } = this.props.form;
     return (
-      <Form inline onSubmit={this.handleSubmit}>
-        <FormItem label="部门名称" >
-          <Input placeholder="请输入部门名称" {...getFieldProps('depName')} />
-        </FormItem>
-        <Button type="primary" htmlType="submit">查找</Button>
-      </Form>
+      <Row type="flex" justify="end">
+        <Form inline onSubmit={this.handleSubmit}>
+          <FormItem label="部门名称" >
+            <Input placeholder="请输入部门名称" {...getFieldProps('depName')} />
+          </FormItem>
+          <Button type="primary" htmlType="submit">查找</Button>
+        </Form>
+      </Row>
     );
   }
 }

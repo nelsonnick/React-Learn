@@ -1,14 +1,15 @@
 import React from 'react';
-import { Form, Input, Select, Col } from 'antd';
+import { Form, Input, Select } from 'antd';
 import $ from 'jquery';
 const FormItem = Form.Item;
 const Option = Select.Option;
-const InputGroup = Input.Group;
 import * as AjaxFunction from '../../../Util/AjaxFunction.js';
 class AddFrom extends React.Component {
   constructor(props) {
     super(props);
     this.departmentNameCheck = this.departmentNameCheck.bind(this);
+    this.departmentPhoneCheck = this.departmentPhoneCheck.bind(this);
+    this.departmentAddressCheck = this.departmentAddressCheck.bind(this);
   }
 
   departmentNameCheck(rule, value, callback) {
@@ -33,7 +34,50 @@ class AddFrom extends React.Component {
       });
     }
   }
-
+  departmentPhoneCheck(rule, value, callback) {
+    if (!value) {
+      callback();
+    } else {
+      $.ajax({
+        'type': 'POST',
+        'url': AjaxFunction.DepartmentPhone,
+        'dataType': 'json',
+        'data': { 'phone': value },
+        'success': (data) => {
+          if (data === '正常') {
+            callback();
+          } else {
+            callback(new Error(data));
+          }
+        },
+        'error': () => {
+          callback(new Error('无法执行后台验证，请重试'));
+        },
+      });
+    }
+  }
+  departmentAddressCheck(rule, value, callback) {
+    if (!value) {
+      callback();
+    } else {
+      $.ajax({
+        'type': 'POST',
+        'url': AjaxFunction.DepartmentAddress,
+        'dataType': 'json',
+        'data': { 'address': value },
+        'success': (data) => {
+          if (data === '正常') {
+            callback();
+          } else {
+            callback(new Error(data));
+          }
+        },
+        'error': () => {
+          callback(new Error('无法执行后台验证，请重试'));
+        },
+      });
+    }
+  }
   render() {
     const { getFieldProps, getFieldError, isFieldValidating } = this.props.form;
 
@@ -43,8 +87,17 @@ class AddFrom extends React.Component {
     };
     const departmentNameProps = getFieldProps('departmentName', {
       rules: [
-        { required: true, min: 3, message: '部门名称至少为 3 个汉字' },
         { validator: this.departmentNameCheck },
+      ],
+    });
+    const departmentPhoneProps = getFieldProps('departmentPhone', {
+      rules: [
+        { validator: this.departmentPhoneCheck },
+      ],
+    });
+    const departmentAddressProps = getFieldProps('departmentAddress', {
+      rules: [
+        { validator: this.departmentAddressCheck },
       ],
     });
     return (
@@ -63,26 +116,18 @@ class AddFrom extends React.Component {
           {...formItemLayout}
           hasFeedback
           required
+          help={isFieldValidating('departmentPhone') ? '校验中...' : (getFieldError('departmentPhone') || [])}
         >
-          <InputGroup>
-            <Col span="6">
-              <Input id="departmentPhone1" defaultValue="0531" placeholder="2位或3位区号" />
-            </Col>
-            <Col span="4">
-              <span>---</span>
-            </Col>
-            <Col span="16">
-              <Input id="departmentPhone2" placeholder="7位或8位固定电话" />
-            </Col>
-          </InputGroup>
+          <Input id="departmentPhone" placeholder="请输入8位固定电话" {...departmentPhoneProps} />
         </FormItem>
         <FormItem
           label="部门地址"
           {...formItemLayout}
           hasFeedback
           required
+          help={isFieldValidating('departmentAddress') ? '校验中...' : (getFieldError('departmentAddress') || [])}
         >
-          <Input id="departmentAddress" placeholder="请输入详细地址" />
+          <Input id="departmentAddress" placeholder="请输入详细地址" {...departmentAddressProps} />
         </FormItem>
         <FormItem
           label="部门状态"

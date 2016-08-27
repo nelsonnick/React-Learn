@@ -41,18 +41,18 @@ export default class DepCont extends React.Component {
   render() {
     return (
       <div>
-        <Row>
-          <Col span={4}><AddButton /></Col>
-          <Col span={6} offset={14}><DataSearch setQuery={this.getQuery} /></Col>
+        <Row type="flex" justify="start">
+          <Col span={12}><AddButton /></Col>
+          <Col span={12}><DataSearch setQuery={this.getQuery} /></Col>
         </Row>
         <Row>
-          <span style={{ 'font-size': '20px' }}>&nbsp;&nbsp;&nbsp;</span>
+          <span style={{ 'font-size': '5px' }}>&nbsp;&nbsp;&nbsp;</span>
         </Row>
         <Row>
           <DataTable tableData={this.state.DataTable} />
         </Row>
         <Row>
-          <span style={{ 'font-size': '36px' }}>&nbsp;&nbsp;&nbsp;</span>
+          <span style={{ 'font-size': '20px' }}>&nbsp;&nbsp;&nbsp;</span>
         </Row>
         <Row>
           <DataPagination />

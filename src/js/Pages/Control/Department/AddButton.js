@@ -1,4 +1,4 @@
-import { Modal, Button, notification } from 'antd';
+import { Modal, Button, notification, Row } from 'antd';
 import React from 'react';
 import AddForm from './AddForm';
 
@@ -28,7 +28,7 @@ export default class AddButton extends React.Component {
   }
 
   handleOk() {
-    console.log(this.refs.AddForm.getFieldValue('departmentName'));
+    // console.log(this.refs.AddForm.getFieldValue('departmentName'));
     this.refs.AddForm.validateFields((errors, values) => {
       if (!!errors) {
         openNotificationWithIcon('error', '录入错误', '录入的信息中有错误，请核实后再更新');
@@ -57,8 +57,8 @@ export default class AddButton extends React.Component {
 
   render() {
     return (
-      <div>
-        <Button type="primary" onClick={this.showModal}>新增部门</Button>
+      <Row type="flex" justify="start">
+        <Button type="primary" size="large" onClick={this.showModal}>新增部门</Button>
         <Modal
           maskClosable={false}
           title="新增部门"
@@ -67,14 +67,14 @@ export default class AddButton extends React.Component {
           confirmLoading={this.state.confirmLoading}
           onCancel={this.handleCancel}
           footer={[
-            <Button key="back" size="large" onClick={this.handleCancel}>返 回</Button>,
+            <Button key="back" onClick={this.handleCancel}>返 回</Button>,
             <Button key="reset" type="ghost" size="large" onClick={this.handleReset}>重 置</Button>,
             <Button key="submit" type="primary" size="large" loading={this.state.loading} onClick={this.handleOk}>提 交</Button>,
           ]}
         >
           <AddForm ref="AddForm" />
         </Modal>
-      </div>
+      </Row>
     );
   }
 }
