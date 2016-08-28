@@ -6,7 +6,20 @@ import DataPagination from './DataPagination.js';
 import AddButton from './AddButton.js';
 import * as AjaxFunction from '../../../Util/AjaxFunction.js';
 import $ from 'jquery';
-
+const tableDat = [
+  { key: '1',
+    name: '胡彦斌',
+    phone: '0531-87654321',
+    address: '西湖区湖底公园1号',
+    state: '可用',
+  },
+  { key: '2',
+    name: '李大嘴',
+    phone: '0531-87654321',
+    address: '西湖区湖底公园2号',
+    state: '可用',
+  },
+];
 export default class DepCont extends React.Component {
   constructor(props) {
     super(props);
@@ -31,6 +44,11 @@ export default class DepCont extends React.Component {
       },
       'error': () => {
         console.log('未查到数据');
+        this.setState(
+          {
+            DataTable: tableDat,
+          }
+        );
       },
     });
   }

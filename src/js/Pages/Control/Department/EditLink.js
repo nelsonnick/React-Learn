@@ -1,6 +1,6 @@
-import { Modal, Button, notification, Row } from 'antd';
+import { Modal, Button, notification } from 'antd';
 import React from 'react';
-import AddForm from './AddForm';
+import EditForm from './EditForm';
 import * as AjaxFunction from '../../../Util/AjaxFunction.js';
 import $ from 'jquery';
 
@@ -11,7 +11,7 @@ const openNotificationWithIcon = (type, msg, desc) => {
   });
 };
 
-export default class AddButton extends React.Component {
+export default class EditLink extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -33,7 +33,7 @@ export default class AddButton extends React.Component {
     this.setState({
       confirmLoading: true,
     });
-    this.refs.AddForm.validateFields((errors, values) => {
+    this.refs.EditForm.validateFields((errors, values) => {
       if (!!errors) {
         openNotificationWithIcon('error', '录入错误', '录入的信息中有错误，请核实后再更新');
         this.setState({
@@ -58,7 +58,7 @@ export default class AddButton extends React.Component {
               visible: false,
               confirmLoading: false,
             });
-            this.refs.AddForm.resetFields();
+            this.refs.EditForm.resetFields();
             openNotificationWithIcon('success', '保存成功', '保存成功，请进行后续操作');
           } else {
             openNotificationWithIcon('error', '保存失败', '无法进行保存操作，请检查输入的内容');
@@ -80,24 +80,24 @@ export default class AddButton extends React.Component {
   }
 
   handleCancel() {
-    this.refs.AddForm.resetFields();
+    this.refs.EditForm.resetFields();
     this.setState({
       visible: false,
     });
   }
 
   handleReset() {
-    this.refs.AddForm.resetFields();
+    this.refs.EditForm.resetFields();
   }
 
-
   render() {
+    const { departmentName } = this.props;
     return (
-      <Row type="flex" justify="start">
-        <Button type="primary" size="large" onClick={this.showModal}>新增部门</Button>
+      <span>
+        <a onClick={this.showModal}>修改部门信息</a>
         <Modal
           maskClosable={false}
-          title="新增部门"
+          title="修改部门信息"
           visible={this.state.visible}
           onOk={this.handleOk}
           confirmLoading={this.state.confirmLoading}
@@ -108,9 +108,12 @@ export default class AddButton extends React.Component {
             <Button key="submit" type="primary" size="large" loading={this.state.loading} onClick={this.handleOk}>提 交</Button>,
           ]}
         >
-          <AddForm ref="AddForm" />
+          <EditForm ref="EditForm" departmentName={departmentName} />
         </Modal>
-      </Row>
+      </span>
     );
   }
 }
+EditLink.propTypes = {
+  departmentName: React.PropTypes.string,
+};

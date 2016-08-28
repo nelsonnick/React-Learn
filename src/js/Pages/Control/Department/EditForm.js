@@ -4,14 +4,16 @@ import $ from 'jquery';
 const FormItem = Form.Item;
 const Option = Select.Option;
 import * as AjaxFunction from '../../../Util/AjaxFunction.js';
-class AddFrom extends React.Component {
+class EditFrom extends React.Component {
   constructor(props) {
     super(props);
     this.departmentNameCheck = this.departmentNameCheck.bind(this);
     this.departmentPhoneCheck = this.departmentPhoneCheck.bind(this);
     this.departmentAddressCheck = this.departmentAddressCheck.bind(this);
   }
-
+  componentDidMount() {
+    console.log(this.props.departmentName);
+  }
   departmentNameCheck(rule, value, callback) {
     if (!value) {
       callback();
@@ -80,23 +82,27 @@ class AddFrom extends React.Component {
   }
   render() {
     const { getFieldProps, getFieldError, isFieldValidating } = this.props.form;
-
+    const { departmentName } = this.props;
     const formItemLayout = {
       labelCol: { span: 6 },
       wrapperCol: { span: 14 },
     };
     const departmentNameProps = getFieldProps('departmentName', {
       rules: [
+        { required: true, whitespace: true, message: '必填项' },
         { validator: this.departmentNameCheck },
       ],
+      initialValue: departmentName,
     });
     const departmentPhoneProps = getFieldProps('departmentPhone', {
       rules: [
+        { required: true, whitespace: true, message: '必填项' },
         { validator: this.departmentPhoneCheck },
       ],
     });
     const departmentAddressProps = getFieldProps('departmentAddress', {
       rules: [
+        { required: true, whitespace: true, message: '必填项' },
         { validator: this.departmentAddressCheck },
       ],
     });
@@ -144,14 +150,15 @@ class AddFrom extends React.Component {
           {...formItemLayout}
           hasFeedback
         >
-          <Input type="textarea" rows="3" placeholder="其他需要填写的信息" />
+          <Input type="textarea" rows="3" placeholder="其他需要填写的信息" defaultValue="爱的风" />
         </FormItem>
       </Form>
     );
   }
 }
-AddFrom = Form.create({})(AddFrom);
-export default AddFrom;
-AddFrom.propTypes = {
+EditFrom = Form.create({})(EditFrom);
+export default EditFrom;
+EditFrom.propTypes = {
   form: React.PropTypes.object,
+  departmentName: React.PropTypes.string,
 };

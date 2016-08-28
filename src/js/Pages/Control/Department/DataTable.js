@@ -1,6 +1,6 @@
 import React from 'react';
 import { Table, Popconfirm, message } from 'antd';
-
+import EditLink from './EditLink.js';
 
 export default class DataTable extends React.Component {
   constructor(props) {
@@ -41,7 +41,7 @@ export default class DataTable extends React.Component {
             <span>
               <a href="#">查看详情</a>
               <span className="ant-divider" />
-              <a href="#">部门修改</a>
+              <EditLink departmentName={record.name} />
               <span className="ant-divider" />
               <Popconfirm title="确定要删除这个任务吗？" onConfirm={this.confirm} onCancel={this.cancel}>
                 <a href="#">停用：{record.name}</a>
@@ -67,6 +67,7 @@ export default class DataTable extends React.Component {
     const { tableData } = this.props;
     return (
       <Table
+        rowKey={record => record.id}
         columns={columns}
         dataSource={tableData}
         pagination={false}
