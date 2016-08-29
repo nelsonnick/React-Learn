@@ -14,20 +14,19 @@ const openNotificationWithIcon = (type, msg, desc) => {
 export default class DataTable extends React.Component {
   constructor(props) {
     super(props);
-    this.active = this.active.bind(this);
     this.abandon = this.abandon.bind(this);
+    this.active = this.active.bind(this);
     this.delete = this.delete.bind(this);
     this.cancel = this.cancel.bind(this);
   }
 
-  active = (departmentId) => {
-    console.log(departmentId);
+  active(DepartmentId) {
     $.ajax({
       'type': 'POST',
       'url': AjaxFunction.DepartmentActive,
       'dataType': 'json',
       'data': {
-        'id': departmentId,
+        'id': DepartmentId,
       },
       'success': (data) => {
         if (data === 'Active Success') {
@@ -41,8 +40,8 @@ export default class DataTable extends React.Component {
       },
     });
   }
+
   abandon(DepartmentId) {
-    message.success('点击了注销');
     $.ajax({
       'type': 'POST',
       'url': AjaxFunction.DepartmentAbandon,
@@ -62,8 +61,25 @@ export default class DataTable extends React.Component {
       },
     });
   }
-  delete() {
-    message.success('点击了删除');
+  delete(DepartmentId) {
+    $.ajax({
+      'type': 'POST',
+      'url': AjaxFunction.DepartmentDelete,
+      'dataType': 'json',
+      'data': {
+        'id': DepartmentId,
+      },
+      'success': (data) => {
+        if (data === 'Delete Success') {
+          openNotificationWithIcon('success', '删除成功', '删除成功，请进行后续操作');
+        } else {
+          openNotificationWithIcon('error', '删除失败', '无法进行删除操作，请刷新页面');
+        }
+      },
+      'error': () => {
+        openNotificationWithIcon('error', '请求错误', '无法完成修改操作，请检查网络情况');
+      },
+    });
   }
 
   cancel() {
@@ -104,11 +120,11 @@ export default class DataTable extends React.Component {
                 departmentOther={record.other}
               />
               <span className="ant-divider" />
-              <Popconfirm title="确定要注销这个部门吗？" onConfirm={this.abandon.bind(this, record.key)} onCancel={this.cancel}>
+              <Popconfirm title="确定要注销这个部门吗？" okText="注销" onConfirm={this.abandon.bind(this, record.key)} onCancel={this.cancel}>
                 <a href="#">注销：{record.name}</a>
               </Popconfirm>
               <span className="ant-divider" />
-              <Popconfirm title="确定要删除这个部门吗？" onConfirm={this.delete} onCancel={this.cancel}>
+              <Popconfirm title="确定要删除这个部门吗？" okText="删除" onConfirm={this.delete.bind(this, record.key)} onCancel={this.cancel}>
                 <a href="#">删除</a>
               </Popconfirm>
               <span className="ant-divider" />
@@ -128,11 +144,11 @@ export default class DataTable extends React.Component {
               departmentOther={record.other}
             />
             <span className="ant-divider" />
-            <Popconfirm title="确定要激活这个部门吗？" onConfirm={this.active.(record.key)} onCancel={this.cancel}>
+            <Popconfirm title="确定要激活这个部门吗？" okText="激活" onConfirm={this.active.bind(this, record.key)} onCancel={this.cancel}>
               <a href="#">激活：{record.name}</a>
             </Popconfirm>
             <span className="ant-divider" />
-            <Popconfirm title="确定要删除这个部门吗？" onConfirm={this.delete} onCancel={this.cancel}>
+            <Popconfirm title="确定要删除这个部门吗？" okText="删除" onConfirm={this.delete.bind(this, record.key)} onCancel={this.cancel}>
               <a href="#">删除</a>
             </Popconfirm>
             <span className="ant-divider" />

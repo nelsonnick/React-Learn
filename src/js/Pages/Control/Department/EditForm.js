@@ -11,9 +11,9 @@ class EditFrom extends React.Component {
     this.departmentPhoneCheck = this.departmentPhoneCheck.bind(this);
     this.departmentAddressCheck = this.departmentAddressCheck.bind(this);
   }
-  componentDidMount() {
-    console.log(this.props.departmentId);
-  }
+  // componentDidMount() {
+  //   console.log(this.props.departmentId);
+  // }
   departmentNameCheck(rule, value, callback) {
     if (!value) {
       callback();

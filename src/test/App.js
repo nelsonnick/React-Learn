@@ -1,29 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import SubComponent from './SubComponent';
-
-class MyComponent extends React.Component {
-  constructor(props) {
-    super(props);
-    this.handleClick = this.handleClick.bind(this);
-  }
-  handleClick() {
-    console.log(this.refs);
-    console.log(this.refs.subcomponents);
-    this.refs.subcomponents.subHandleClick();
-  }
-  render() {
-    return (
-      <div>
-        <input
-          type="button"
-          value="点我调用子组件方法"
-          onClick={this.handleClick}
-        />
-        <SubComponent ref="subcomponents" />
-      </div>
-    );
-  }
+import { Popconfirm, message } from 'antd';
+function confirm(test) {
+  console.log(test);
 }
 
-ReactDOM.render(<MyComponent />, document.body);
+function cancel() {
+  confirm('c');
+  message.error('点击了取消');
+}
+
+ReactDOM.render(<Popconfirm title="确定要删除这个任务吗？" onCancel={cancel}>
+  <a href="#">删除</a>
+</Popconfirm>, document.body);
