@@ -9,7 +9,7 @@ class DataSearch extends React.Component {
   }
   handleSubmit(e) {
     e.preventDefault();
-    this.props.setQuery(this.props.form.getFieldValue('depName'));
+    this.props.setQuery(this.props.form.getFieldValue('departmentName'));
   }
 
   render() {
@@ -18,7 +18,7 @@ class DataSearch extends React.Component {
       <Row type="flex" justify="end">
         <Form inline onSubmit={this.handleSubmit}>
           <FormItem label="部门名称" >
-            <Input placeholder="请输入部门名称" {...getFieldProps('depName')} />
+            <Input placeholder="请输入部门名称" {...getFieldProps('departmentName')} />
           </FormItem>
           <Button type="primary" htmlType="submit">查找</Button>
         </Form>

@@ -2,6 +2,7 @@ import React from 'react';
 import { Table, Popconfirm, message, notification } from 'antd';
 import $ from 'jquery';
 import EditLink from './EditLink.js';
+import LookLink from './LookLink.js';
 import * as AjaxFunction from '../../../Util/AjaxFunction.js';
 
 const openNotificationWithIcon = (type, msg, desc) => {
@@ -109,7 +110,14 @@ export default class DataTable extends React.Component {
         if (record.state === '激活') {
           return (
             <span>
-              <a href="#">查看详情</a>
+              <LookLink
+                departmentId={record.key}
+                departmentName={record.name}
+                departmentAddress={record.address}
+                departmentPhone={record.phone}
+                departmentState={record.state}
+                departmentOther={record.other}
+              />
               <span className="ant-divider" />
               <EditLink
                 departmentId={record.key}
@@ -133,7 +141,14 @@ export default class DataTable extends React.Component {
         }
         return (
           <span>
-            <a href="#">查看详情</a>
+            <LookLink
+              departmentId={record.key}
+              departmentName={record.name}
+              departmentAddress={record.address}
+              departmentPhone={record.phone}
+              departmentState={record.state}
+              departmentOther={record.other}
+            />
             <span className="ant-divider" />
             <EditLink
               departmentId={record.key}

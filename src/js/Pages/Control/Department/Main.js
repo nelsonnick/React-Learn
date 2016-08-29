@@ -1,5 +1,5 @@
 import React from 'react';
-import { Row, Col } from 'antd';
+import { Row, Col, notification } from 'antd';
 import DataTable from './DataTable.js';
 import DataSearch from './DataSearch.js';
 import DataPagination from './DataPagination.js';
@@ -20,13 +20,27 @@ const tableDat = [
     state: '激活',
   },
 ];
+
+const openNotificationWithIcon = (type, msg, desc) => {
+  notification[type]({
+    message: msg,
+    description: desc,
+  });
+};
+
 export default class DepCont extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      DataTable: [],
+      DataTable: [],   // 当前页的具体数据
+      PageSize: '',    // 当前每页的条数
+      PageNow: '',     // 当前页的页码
+      PageTotal: '',   // 当前数据的总页数
+      DataCount: '',   // 当前数据的总数量
+      QueryString: '', // 当前的搜索字符
     };
     this.getQuery = this.getQuery.bind(this);
+    this.onShowSizeChange = this.onShowSizeChange.bind(this);
   }
 
   componentWillMount() {
@@ -34,7 +48,7 @@ export default class DepCont extends React.Component {
       'type': 'POST',
       'url': AjaxFunction.DepartmentInit,
       'dataType': 'json',
-      // 'data': { 'id': '1' },
+      // 'data': { 'PageNow': this.state.PageNow },
       'success': (data) => {
         this.setState(
           {
@@ -43,7 +57,7 @@ export default class DepCont extends React.Component {
         );
       },
       'error': () => {
-        console.log('未查到数据');
+        openNotificationWithIcon('error', '请求错误', '无法完成刷新列表，请检查网络情况');
         this.setState(
           {
             DataTable: tableDat,
@@ -51,9 +65,199 @@ export default class DepCont extends React.Component {
         );
       },
     });
+    $.ajax({
+      'type': 'POST',
+      'url': AjaxFunction.DepartmentTotalCount,
+      'dataType': 'json',
+      'success': (data) => {
+        this.setState(
+          {
+            DataCount: data,
+          }
+        );
+      },
+      'error': () => {
+        openNotificationWithIcon('error', '请求错误', '无法完成数据读取，请检查网络情况');
+        this.setState(
+          {
+            DataCount: '0',
+          }
+        );
+      },
+    });
+  }
+
+  onShowSizeChange(current, pageSize) {
+    console.log(current, pageSize);
   }
   getQuery(queryString) {
-    console.log(queryString);
+    this.setState(
+      {
+        QueryString: queryString,
+      }
+    );
+    $.ajax({
+      'type': 'POST',
+      'url': AjaxFunction.DepartmentQuery,
+      'dataType': 'json',
+      'data': {
+        'QueryString': this.state.QueryString,
+      },
+      'success': (data) => {
+        this.setState(
+          {
+            DataTable: data,
+          }
+        );
+      },
+      'error': () => {
+        openNotificationWithIcon('error', '请求错误', '无法完成刷新列表，请检查网络情况');
+        this.setState(
+          {
+            DataTable: [],
+          }
+        );
+      },
+    });
+    $.ajax({
+      'type': 'POST',
+      'url': AjaxFunction.DepartmentQueryCount,
+      'dataType': 'json',
+      'data': {
+        'QueryString': this.state.QueryString,
+      },
+      'success': (data) => {
+        this.setState(
+          {
+            DataCount: data,
+          }
+        );
+      },
+      'error': () => {
+        openNotificationWithIcon('error', '请求错误', '无法完成数据读取，请检查网络情况');
+        this.setState(
+          {
+            DataCount: '0',
+          }
+        );
+      },
+    });
+  }
+  PageChange(page) {
+    this.setState({
+      PageNow: page,
+    });
+  }
+  AfterDelete() {
+    $.ajax({
+      'type': 'POST',
+      'url': AjaxFunction.DepartmentInit,
+      'dataType': 'json',
+      'success': (data) => {
+        this.setState(
+          {
+            DataTable: data,
+          }
+        );
+      },
+      'error': () => {
+        openNotificationWithIcon('error', '请求错误', '无法完成刷新列表，请检查网络情况');
+        this.setState(
+          {
+            DataTable: [],
+          }
+        );
+      },
+    });
+    $.ajax({
+      'type': 'POST',
+      'url': AjaxFunction.DepartmentTotalCount,
+      'dataType': 'json',
+      'success': (data) => {
+        this.setState(
+          {
+            DataCount: data,
+          }
+        );
+      },
+      'error': () => {
+        openNotificationWithIcon('error', '请求错误', '无法完成数据读取，请检查网络情况');
+        this.setState(
+          {
+            DataCount: '0',
+          }
+        );
+      },
+    });
+  }
+  AfterAdd() {
+    $.ajax({
+      'type': 'POST',
+      'url': AjaxFunction.DepartmentInit,
+      'dataType': 'json',
+      'success': (data) => {
+        this.setState(
+          {
+            DataTable: data,
+          }
+        );
+      },
+      'error': () => {
+        openNotificationWithIcon('error', '请求错误', '无法完成刷新列表，请检查网络情况');
+        this.setState(
+          {
+            DataTable: [],
+          }
+        );
+      },
+    });
+    $.ajax({
+      'type': 'POST',
+      'url': AjaxFunction.DepartmentTotalCount,
+      'dataType': 'json',
+      'success': (data) => {
+        this.setState(
+          {
+            DataCount: data,
+          }
+        );
+      },
+      'error': () => {
+        openNotificationWithIcon('error', '请求错误', '无法完成数据读取，请检查网络情况');
+        this.setState(
+          {
+            DataCount: '0',
+          }
+        );
+      },
+    });
+  }
+
+  AfterEditAndState() {
+    $.ajax({
+      'type': 'POST',
+      'url': AjaxFunction.DepartmentPaginate,
+      'dataType': 'json',
+      'data': {
+        'PageNow': this.state.PageNow,
+        'QueryString': this.state.QueryString,
+      },
+      'success': (data) => {
+        this.setState(
+          {
+            DataTable: data,
+          }
+        );
+      },
+      'error': () => {
+        openNotificationWithIcon('error', '请求错误', '无法完成刷新列表，请检查网络情况');
+        this.setState(
+          {
+            DataTable: [],
+          }
+        );
+      },
+    });
   }
 
   render() {
@@ -73,7 +277,7 @@ export default class DepCont extends React.Component {
           <span style={{ 'font-size': '20px' }}>&nbsp;&nbsp;&nbsp;</span>
         </Row>
         <Row>
-          <DataPagination />
+          <DataPagination onShowSizeChange={this.onShowSizeChange} DataCount={this.state.DataCount} />
         </Row>
       </div>
     );

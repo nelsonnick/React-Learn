@@ -87,16 +87,19 @@ class AddFrom extends React.Component {
     };
     const departmentNameProps = getFieldProps('departmentName', {
       rules: [
+        { required: true, whitespace: true, message: '必填项' },
         { validator: this.departmentNameCheck },
       ],
     });
     const departmentPhoneProps = getFieldProps('departmentPhone', {
       rules: [
+        { required: true, whitespace: true, message: '必填项' },
         { validator: this.departmentPhoneCheck },
       ],
     });
     const departmentAddressProps = getFieldProps('departmentAddress', {
       rules: [
+        { required: true, whitespace: true, message: '必填项' },
         { validator: this.departmentAddressCheck },
       ],
     });
