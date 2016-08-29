@@ -50,7 +50,7 @@ export default class AddButton extends React.Component {
           'phone': values.departmentPhone,
           'address': values.departmentAddress,
           'state': values.departmentState,
-          'ohter': values.departmentOther,
+          'other': values.departmentOther,
         },
         'success': (data) => {
           if (data === 'Save Success') {
@@ -69,7 +69,7 @@ export default class AddButton extends React.Component {
           }
         },
         'error': () => {
-          openNotificationWithIcon('error', '请求错误', '无法完成新增情况，请检查网络情况');
+          openNotificationWithIcon('error', '请求错误', '无法完成新增操作，请检查网络情况');
           this.setState({
             confirmLoading: false,
           });

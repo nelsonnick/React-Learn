@@ -12,7 +12,7 @@ class EditFrom extends React.Component {
     this.departmentAddressCheck = this.departmentAddressCheck.bind(this);
   }
   componentDidMount() {
-    console.log(this.props.departmentName);
+    console.log(this.props.departmentId);
   }
   departmentNameCheck(rule, value, callback) {
     if (!value) {
@@ -82,7 +82,7 @@ class EditFrom extends React.Component {
   }
   render() {
     const { getFieldProps, getFieldError, isFieldValidating } = this.props.form;
-    const { departmentName } = this.props;
+    const { departmentName, departmentPhone, departmentAddress, departmentState, departmentOther } = this.props;
     const formItemLayout = {
       labelCol: { span: 6 },
       wrapperCol: { span: 14 },
@@ -99,12 +99,14 @@ class EditFrom extends React.Component {
         { required: true, whitespace: true, message: '必填项' },
         { validator: this.departmentPhoneCheck },
       ],
+      initialValue: departmentPhone,
     });
     const departmentAddressProps = getFieldProps('departmentAddress', {
       rules: [
         { required: true, whitespace: true, message: '必填项' },
         { validator: this.departmentAddressCheck },
       ],
+      initialValue: departmentAddress,
     });
     return (
       <Form horizontal>
@@ -140,7 +142,7 @@ class EditFrom extends React.Component {
           {...formItemLayout}
           required
         >
-          <Select size="large" defaultValue="1" >
+          <Select size="large" defaultValue={departmentState} >
             <Option value="1">激活</Option>
             <Option value="0">注销</Option>
           </Select>
@@ -150,7 +152,7 @@ class EditFrom extends React.Component {
           {...formItemLayout}
           hasFeedback
         >
-          <Input type="textarea" rows="3" placeholder="其他需要填写的信息" defaultValue="爱的风" />
+          <Input type="textarea" rows="3" placeholder="其他需要填写的信息" defaultValue={departmentOther} />
         </FormItem>
       </Form>
     );
@@ -160,5 +162,10 @@ EditFrom = Form.create({})(EditFrom);
 export default EditFrom;
 EditFrom.propTypes = {
   form: React.PropTypes.object,
+  departmentId: React.PropTypes.number,
   departmentName: React.PropTypes.string,
+  departmentAddress: React.PropTypes.string,
+  departmentPhone: React.PropTypes.string,
+  departmentState: React.PropTypes.string,
+  departmentOther: React.PropTypes.string,
 };

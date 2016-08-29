@@ -43,25 +43,26 @@ export default class EditLink extends React.Component {
       }
       $.ajax({
         'type': 'POST',
-        'url': AjaxFunction.DepartmentAdd,
+        'url': AjaxFunction.DepartmentEdit,
         'dataType': 'json',
         'data': {
+          'id': values.departmentId,
           'name': values.departmentName,
           'phone': values.departmentPhone,
           'address': values.departmentAddress,
           'state': values.departmentState,
-          'ohter': values.departmentOther,
+          'other': values.departmentOther,
         },
         'success': (data) => {
-          if (data === 'Save Success') {
+          if (data === 'Edit Success') {
             this.setState({
               visible: false,
               confirmLoading: false,
             });
             this.refs.EditForm.resetFields();
-            openNotificationWithIcon('success', '保存成功', '保存成功，请进行后续操作');
+            openNotificationWithIcon('success', '修改成功', '修改成功，请进行后续操作');
           } else {
-            openNotificationWithIcon('error', '保存失败', '无法进行保存操作，请检查输入的内容');
+            openNotificationWithIcon('error', '修改失败', '无法进行修改操作，请检查输入的内容');
             this.setState({
               confirmLoading: false,
             });
@@ -69,7 +70,7 @@ export default class EditLink extends React.Component {
           }
         },
         'error': () => {
-          openNotificationWithIcon('error', '请求错误', '无法完成新增情况，请检查网络情况');
+          openNotificationWithIcon('error', '请求错误', '无法完成修改操作，请检查网络情况');
           this.setState({
             confirmLoading: false,
           });
@@ -91,7 +92,7 @@ export default class EditLink extends React.Component {
   }
 
   render() {
-    const { departmentName } = this.props;
+    const { departmentId, departmentName, departmentPhone, departmentAddress, departmentState, departmentOther } = this.props;
     return (
       <span>
         <a onClick={this.showModal}>修改部门信息</a>
@@ -108,12 +109,25 @@ export default class EditLink extends React.Component {
             <Button key="submit" type="primary" size="large" loading={this.state.loading} onClick={this.handleOk}>提 交</Button>,
           ]}
         >
-          <EditForm ref="EditForm" departmentName={departmentName} />
+          <EditForm
+            ref="EditForm"
+            departmentId={departmentId}
+            departmentName={departmentName}
+            departmentAddress={departmentAddress}
+            departmentPhone={departmentPhone}
+            departmentState={departmentState}
+            departmentOther={departmentOther}
+          />
         </Modal>
       </span>
     );
   }
 }
 EditLink.propTypes = {
+  departmentId: React.PropTypes.number,
   departmentName: React.PropTypes.string,
+  departmentAddress: React.PropTypes.string,
+  departmentPhone: React.PropTypes.string,
+  departmentState: React.PropTypes.string,
+  departmentOther: React.PropTypes.string,
 };

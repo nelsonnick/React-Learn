@@ -11,13 +11,13 @@ const tableDat = [
     name: '胡彦斌',
     phone: '0531-87654321',
     address: '西湖区湖底公园1号',
-    state: '可用',
+    state: '注销',
   },
   { key: '2',
     name: '李大嘴',
     phone: '0531-87654321',
     address: '西湖区湖底公园2号',
-    state: '可用',
+    state: '激活',
   },
 ];
 export default class DepCont extends React.Component {
