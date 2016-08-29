@@ -20,7 +20,7 @@ export default class DataTable extends React.Component {
     this.cancel = this.cancel.bind(this);
   }
 
-  active(departmentId) {
+  active = (departmentId) => {
     console.log(departmentId);
     $.ajax({
       'type': 'POST',
@@ -128,7 +128,7 @@ export default class DataTable extends React.Component {
               departmentOther={record.other}
             />
             <span className="ant-divider" />
-            <Popconfirm title="确定要激活这个部门吗？" onConfirm={this.active.bind(this, record.key)} onCancel={this.cancel}>
+            <Popconfirm title="确定要激活这个部门吗？" onConfirm={this.active.(record.key)} onCancel={this.cancel}>
               <a href="#">激活：{record.name}</a>
             </Popconfirm>
             <span className="ant-divider" />
