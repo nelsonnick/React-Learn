@@ -3,7 +3,7 @@ import { Pagination, Select, Row } from 'antd';
 
 export default class DataPagination extends React.Component {
   render() {
-    const { DataCount, onShowSizeChange } = this.props;
+    const { DataCount, onShowSizeChange, PageNow } = this.props;
     return (
       <Row type="flex" justify="end">
         <Pagination
@@ -12,6 +12,7 @@ export default class DataPagination extends React.Component {
           onShowSizeChange={onShowSizeChange}
           defaultCurrent={1}
           total={DataCount}
+          PageNow={PageNow}
           showTotal={total => `共 ${total} 条`}
           selectComponentClass={Select}
         />
@@ -21,5 +22,6 @@ export default class DataPagination extends React.Component {
 }
 DataPagination.propTypes = {
   DataCount: React.PropTypes.string,
+  PageNow: React.PropTypes.string,
   onShowSizeChange: React.PropTypes.func,
 };

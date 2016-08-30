@@ -32,23 +32,30 @@ export default class DepCont extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      DataTable: [],   // 当前页的具体数据
-      PageSize: '',    // 当前每页的条数
-      PageNow: '',     // 当前页的页码
-      PageTotal: '',   // 当前数据的总页数
-      DataCount: '',   // 当前数据的总数量
-      QueryString: '', // 当前的搜索字符
+      DataTable: [],     // 当前页的具体数据
+      PageSize: '10',    // 当前每页的条数
+      PageNow: '1',      // 当前页的页码
+      DataCount: '0',    // 当前数据的总数量
+      QueryString: '',   // 当前的搜索字符
     };
     this.getQuery = this.getQuery.bind(this);
     this.onShowSizeChange = this.onShowSizeChange.bind(this);
+    this.PageChange = this.PageChange.bind(this);
+    this.AfterDelete = this.AfterDelete.bind(this);
+    this.AfterAdd = this.AfterAdd.bind(this);
+    this.AfterEditAndState = this.AfterEditAndState.bind(this);
   }
 
   componentWillMount() {
     $.ajax({
       'type': 'POST',
-      'url': AjaxFunction.DepartmentInit,
+      'url': AjaxFunction.DepartmentQuery,
       'dataType': 'json',
-      // 'data': { 'PageNow': this.state.PageNow },
+      'data': {
+        'PageNow': '1',
+        'PageSize': '10',
+        'QueryString': '',
+      },
       'success': (data) => {
         this.setState(
           {
@@ -60,7 +67,7 @@ export default class DepCont extends React.Component {
         openNotificationWithIcon('error', '请求错误', '无法完成刷新列表，请检查网络情况');
         this.setState(
           {
-            DataTable: tableDat,
+            DataTable: tableDat, // 这里暂时用演示数据
           }
         );
       },
@@ -88,7 +95,37 @@ export default class DepCont extends React.Component {
   }
 
   onShowSizeChange(current, pageSize) {
-    console.log(current, pageSize);
+    this.setState(
+      {
+        pageSize: pageSize,
+        pageNow: current,
+      }
+    );
+    $.ajax({
+      'type': 'POST',
+      'url': AjaxFunction.DepartmentQuery,
+      'dataType': 'json',
+      'data': {
+        'PageNow': this.state.PageNow,
+        'PageSize': this.state.PageSize,
+        'QueryString': this.state.QueryString,
+      },
+      'success': (data) => {
+        this.setState(
+          {
+            DataTable: data,
+          }
+        );
+      },
+      'error': () => {
+        openNotificationWithIcon('error', '请求错误', '无法完成刷新列表，请检查网络情况');
+        this.setState(
+          {
+            DataTable: [],
+          }
+        );
+      },
+    });
   }
   getQuery(queryString) {
     this.setState(
@@ -101,6 +138,8 @@ export default class DepCont extends React.Component {
       'url': AjaxFunction.DepartmentQuery,
       'dataType': 'json',
       'data': {
+        'PageNow': '1',
+        'PageSize': this.state.PageSize,
         'QueryString': this.state.QueryString,
       },
       'success': (data) => {
@@ -147,12 +186,42 @@ export default class DepCont extends React.Component {
     this.setState({
       PageNow: page,
     });
+    $.ajax({
+      'type': 'POST',
+      'url': AjaxFunction.DepartmentQuery,
+      'dataType': 'json',
+      'data': {
+        'PageNow': this.state.PageNow,
+        'PageSize': this.state.PageSize,
+        'QueryString': this.state.QueryString,
+      },
+      'success': (data) => {
+        this.setState(
+          {
+            DataTable: data,
+          }
+        );
+      },
+      'error': () => {
+        openNotificationWithIcon('error', '请求错误', '无法完成刷新列表，请检查网络情况');
+        this.setState(
+          {
+            DataTable: [],
+          }
+        );
+      },
+    });
   }
   AfterDelete() {
     $.ajax({
       'type': 'POST',
-      'url': AjaxFunction.DepartmentInit,
+      'url': AjaxFunction.DepartmentQuery,
       'dataType': 'json',
+      'data': {
+        'PageNow': this.state.PageNow,
+        'PageSize': this.state.PageSize,
+        'QueryString': this.state.QueryString,
+      },
       'success': (data) => {
         this.setState(
           {
@@ -193,8 +262,13 @@ export default class DepCont extends React.Component {
   AfterAdd() {
     $.ajax({
       'type': 'POST',
-      'url': AjaxFunction.DepartmentInit,
+      'url': AjaxFunction.DepartmentQuery,
       'dataType': 'json',
+      'data': {
+        'PageNow': '1',
+        'PageSize': this.state.PageSize,
+        'QueryString': '',
+      },
       'success': (data) => {
         this.setState(
           {
@@ -240,6 +314,7 @@ export default class DepCont extends React.Component {
       'dataType': 'json',
       'data': {
         'PageNow': this.state.PageNow,
+        'PageSize': this.state.PageSize,
         'QueryString': this.state.QueryString,
       },
       'success': (data) => {
@@ -277,7 +352,7 @@ export default class DepCont extends React.Component {
           <span style={{ 'font-size': '20px' }}>&nbsp;&nbsp;&nbsp;</span>
         </Row>
         <Row>
-          <DataPagination onShowSizeChange={this.onShowSizeChange} DataCount={this.state.DataCount} />
+          <DataPagination PageNow={this.state.PageNow} onShowSizeChange={this.onShowSizeChange} DataCount={this.state.DataCount} />
         </Row>
       </div>
     );
