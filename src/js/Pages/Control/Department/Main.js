@@ -94,13 +94,8 @@ export default class DepCont extends React.Component {
     });
   }
 // dfsdafasdf
-  onShowSizeChange(current, pageSize) {
-    this.setState(
-      {
-        pageSize: pageSize,
-        pageNow: current,
-      }
-    );
+  onShowSizeChange(pageNow, pageSize) {
+    this.setState(pageNow, pageSize);
     $.ajax({
       'type': 'POST',
       'url': AjaxFunction.DepartmentQuery,
